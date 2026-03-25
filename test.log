@@ -1,2 +1,5 @@
 /*C9*/SET SCHEMA PUBLIC
 CREATE TABLE ALUNOS(\u000a  ra int,\u000a  nome varchar(100),\u000a  dataNascimento date,\u000a  renda decimal(15,2),\u000a  primary key(ra))
+/*C10*/SET SCHEMA PUBLIC
+INSERT INTO FUNCIONARIOS VALUES(4,'ddddd','2004-04-04',4000.00)
+COMMIT
