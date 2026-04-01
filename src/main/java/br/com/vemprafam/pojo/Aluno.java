@@ -6,17 +6,17 @@ public class Aluno {
 	private int ra;
 	private String nome;
 	private Date dataNascimento;
-	private Double salario;
+	private Double renda;
 	public Aluno() {
 		super();
 		// TODO Auto-generated constructor stub
 	}
-	public Aluno(int ra, String nome, Date dataNascimento, Double salario) {
+	public Aluno(int ra, String nome, Date dataNascimento, Double renda) {
 		super();
 		this.ra = ra;
 		this.nome = nome;
 		this.dataNascimento = dataNascimento;
-		this.salario = salario;
+		this.renda = renda;
 	}
 	public int getRa() {
 		return ra;
@@ -36,15 +36,14 @@ public class Aluno {
 	public void setDataNascimento(Date dataNascimento) {
 		this.dataNascimento = dataNascimento;
 	}
-	public Double getSalario() {
-		return salario;
+	public Double getRenda() {
+		return renda;
 	}
-	public void setSalario(Double salario) {
-		this.salario = salario;
+	public void setRenda(Double renda) {
+		this.renda = renda;
 	}
 	@Override
 	public String toString() {
-		return "Aluno [ra=" + ra + ", nome=" + nome + ", dataNascimento=" + dataNascimento + ", salario=" + salario
-				+ "]";
+		return "Aluno [ra=" + ra + ", nome=" + nome + ", dataNascimento=" + dataNascimento + ", renda=" + renda + "]";
 	}
 }

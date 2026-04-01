@@ -36,7 +36,7 @@ public class DaoAluno {
 			pstmt.setInt(1, a.getRa());
 			pstmt.setString(2, a.getNome());
 			pstmt.setDate(3, new java.sql.Date(a.getDataNascimento().getTime()));
-			pstmt.setDouble(4, a.getSalario());
+			pstmt.setDouble(4, a.getRenda());
 			pstmt.executeUpdate();
 		} catch (SQLException e) {
 			e.printStackTrace();
@@ -49,7 +49,7 @@ public class DaoAluno {
 			PreparedStatement pstmt = conn.prepareStatement(sql);
 			pstmt.setString(1, a.getNome());
 			pstmt.setDate(2, new java.sql.Date(a.getDataNascimento().getTime()));
-			pstmt.setDouble(3, a.getSalario());
+			pstmt.setDouble(3, a.getRenda());
 			pstmt.setInt(4, a.getRa());
 			pstmt.executeUpdate();
 		} catch (SQLException e) {
