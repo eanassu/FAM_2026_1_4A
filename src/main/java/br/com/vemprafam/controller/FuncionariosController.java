@@ -1,5 +1,7 @@
 package br.com.vemprafam.controller;
 
+import java.util.List;
+
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -34,6 +36,11 @@ public class FuncionariosController {
 		dao.insert(f);
 		return "redirect:funcionarios";
 	}
-
+	@GetMapping("/list")
+	public String getList(Model model) {
+		List<Funcionario> funcionarios = dao.getLista();
+		model.addAttribute("funcionarios", funcionarios);
+		return "funcionarios-list";
+	}
 
 }
