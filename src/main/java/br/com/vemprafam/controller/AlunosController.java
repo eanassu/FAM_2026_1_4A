@@ -1,5 +1,7 @@
 package br.com.vemprafam.controller;
 
+import java.util.List;
+
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -35,5 +37,10 @@ public class AlunosController {
 		dao.insert(a);
 		return "redirect:alunos";
 	}
-
+	@GetMapping("/list")
+	public String getList(Model model) {
+		List<Aluno> alunos = dao.getLista();
+		model.addAttribute("alunos", alunos);
+		return "alunos-list";
+	}
 }

@@ -8,6 +8,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import br.com.vemprafam.dao.DaoFuncionario;
 import br.com.vemprafam.pojo.Funcionario;
@@ -42,5 +43,29 @@ public class FuncionariosController {
 		model.addAttribute("funcionarios", funcionarios);
 		return "funcionarios-list";
 	}
-
+	@GetMapping("/excluir")
+	public String showExcluir() {
+		return "excluir-funcionario";
+	}
+	@GetMapping("/delete")
+	public String delete(@RequestParam int re) {
+		Funcionario f = dao.buscarPeloRe(re);
+		dao.delete(f);
+		return "funcionarios";
+	}
+	@GetMapping("/busca")
+	public String showBusca() {
+		return "buscar-funcionario";
+	}
+	@GetMapping("/search")
+	public String showUpdate(@RequestParam int re, Model model) {
+		Funcionario f = dao.buscarPeloRe(re);
+		model.addAttribute("funcionario", f);
+		return "alterar-funcionario";
+	}
+	@PostMapping("/update")
+	public String update(@ModelAttribute Funcionario f) {
+		dao.update(f);
+		return "funcionarios";
+	}
 }
