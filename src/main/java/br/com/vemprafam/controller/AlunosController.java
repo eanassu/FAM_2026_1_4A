@@ -2,12 +2,14 @@ package br.com.vemprafam.controller;
 
 import java.util.List;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import br.com.vemprafam.dao.DaoAluno;
 import br.com.vemprafam.dao.DaoFuncionario;
@@ -17,6 +19,8 @@ import br.com.vemprafam.pojo.Funcionario;
 @Controller
 @RequestMapping("/alunos")
 public class AlunosController {
+	@Autowired
+	DaoAluno dao;
 	@GetMapping
 	public String showAlunosHomeVazio(Model model) {
 		return "alunos";
@@ -31,7 +35,7 @@ public class AlunosController {
 		model.addAttribute("aluno", a);
 		return "create-aluno";
 	}
-	DaoAluno dao = new DaoAluno();
+
 	@PostMapping
 	public String insert(@ModelAttribute Aluno a) {
 		dao.insert(a);
@@ -42,5 +46,30 @@ public class AlunosController {
 		List<Aluno> alunos = dao.getLista();
 		model.addAttribute("alunos", alunos);
 		return "alunos-list";
+	}
+	@GetMapping("/excluir")
+	public String showExcluir() {
+		return "excluir-aluno";
+	}
+	@GetMapping("/delete")
+	public String delete(@RequestParam int ra) {
+		Aluno a = dao.buscarPeloRa(ra);
+		dao.delete(a);
+		return "alunos";
+	}
+	@GetMapping("/busca")
+	public String showBusca() {
+		return "buscar-aluno";
+	}
+	@GetMapping("/search")
+	public String showUpdate(@RequestParam int ra, Model model) {
+		Aluno a = dao.buscarPeloRa(ra);
+		model.addAttribute("aluno", a);
+		return "alterar-aluno";
+	}
+	@PostMapping("/update")
+	public String update(@ModelAttribute Aluno a) {
+		dao.update(a);
+		return "alunos";
 	}
 }
