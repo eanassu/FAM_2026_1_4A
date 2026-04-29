@@ -9,19 +9,26 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
-import br.com.vemprafam.pojo.Aluno;
+import javax.sql.DataSource;
 
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Repository;
+
+import br.com.vemprafam.pojo.Aluno;
+@Repository
 public class DaoAluno {
-	private String url = "jdbc:hsqldb:hsql://localhost/";
-	private String user = "SA";
-	private String password = "";
 
 	private Connection conn;
 
 	public DaoAluno() {
+		super();
+	}
+
+	@Autowired
+	public DaoAluno(DataSource dataSource) {
 		if (conn == null) {
 			try {
-				conn=DriverManager.getConnection(url,user,password);
+				conn=dataSource.getConnection();
 			} catch (SQLException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
@@ -84,7 +91,7 @@ public class DaoAluno {
 		}
 		return result;
 	}
-	public Aluno buscarPeloRe(int ra) {
+	public Aluno buscarPeloRa(int ra) {
 		String sql="SELECT * FROM ALUNOS WHERE RA=?";
 		try {
 			PreparedStatement pstmt = conn.prepareStatement(sql);
