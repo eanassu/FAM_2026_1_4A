@@ -1,7 +1,6 @@
 package br.com.vemprafam.dao;
 
 import java.sql.Connection;
-import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -9,19 +8,25 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
+import javax.sql.DataSource;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Repository;
+
 import br.com.vemprafam.pojo.Funcionario;
 
+@Repository
 public class DaoFuncionario {
-	private String url = "jdbc:hsqldb:hsql://localhost/";
-	private String user = "SA";
-	private String password = "";
-
 	private Connection conn;
 
 	public DaoFuncionario() {
+		super();
+	}
+	@Autowired
+	public DaoFuncionario(DataSource dataSource) {
 		if (conn == null) {
 			try {
-				conn=DriverManager.getConnection(url,user,password);
+				conn=dataSource.getConnection();
 			} catch (SQLException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
